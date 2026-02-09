@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Hollowwasibelo - Inicio</title>
+    <style>
+        /* Estilos visuales */
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; font-family: sans-serif; }
+        
+        #pantalla-inicio {
+            width: 100vw; height: 100vh;
+            background: url('fondo.png') no-repeat center center fixed; 
+            background-size: cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            position: relative;
+        }
+
+        /* Animación del Botón */
+        .boton-jugar {
+            padding: 15px 50px;
+            font-size: 2rem;
+            color: white;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid #5ecad9;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .boton-jugar:hover {
+            background: #5ecad9;
+            color: black;
+            transform: scale(1.1); /* Se agranda un poco */
+            box-shadow: 0 0 20px #5ecad9;
+        }
+
+        .boton-jugar:active {
+            transform: scale(0.9); /* Animación de pulso al tocarlo */
+        }
+
+        /* Efecto de Hojas Cayendo */
+        .hoja {
+            position: absolute;
+            top: -50px;
+            width: 15px; height: 15px;
+            background: #2d5a27; /* Color verde hoja */
+            border-radius: 0 100% 0 100%;
+            opacity: 0.7;
+            animation: caer linear infinite;
+        }
+
+        @keyframes caer {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="pantalla-inicio">
+        <audio id="musica" loop>
+            <source src="musica.mp3" type="audio/mpeg">
+        </audio>
+
+        <button class="boton-jugar" onclick="iniciarJuego()">Jugar</button>
+    </div>
+
+    <script>
+        // Crear hojas aleatorias
+        function crearHoja() {
+            const hoja = document.createElement('div');
+            hoja.classList.add('hoja');
+            hoja.style.left = Math.random() * 100 + "vw";
+            hoja.style.animationDuration = (Math.random() * 3 + 2) + "s"; // Velocidad aleatoria
+            document.getElementById('pantalla-inicio').appendChild(hoja);
+            
+            setTimeout(() => { hoja.remove(); }, 5000);
+        }
+        setInterval(crearHoja, 300);
+
+        // Función para el botón
+        function iniciarJuego() {
+            const musica = document.getElementById('musica');
+            musica.play(); // La música suele necesitar un clic para empezar por reglas del navegador
+            alert("¡Bienvenido a Hollowwasibelo! El juego está cargando...");
+            // Aquí podrías redirigir a la siguiente parte de tu juego
+        }
+    </script>
+</body>
+</html>
